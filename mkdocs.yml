@@ -1,0 +1,5 @@
+site_name: Linux Notes
+
+nav:
+  - Home: index.md
+  - Networking: networking.md
