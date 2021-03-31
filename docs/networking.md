@@ -46,7 +46,25 @@ Configuring networking in linux varies by distro, so check the documentation for
 
 #### Ubuntu
 
-Modern versions of Ubuntu use [Netplan](https://netplan.io/) to manage the configuration of network interfaces. Network settings are configured in YAML files located in /etc/netplan . Netplan uses these files to generate the configuration which is then used by lower level programs such as NetworkManager.
+Modern versions of Ubuntu (>=18.04) use [Netplan](https://netplan.io/) to manage the configuration of network interfaces. Network settings are configured in YAML files located in /etc/netplan. Netplan uses these files to generate the configuration which is then used by lower level programs such as NetworkManager.
+
+Here's an excerpt of a netplan config file configuring an ethernet interface with a static ip and dns servers:
+```
+network:
+    version: 2
+    ethernets:
+        eth0:
+            dhcp4: false 
+            optional: true
+            addresses:
+                    - 10.1.1.100/24
+            gateway4: 10.1.1.1
+            nameservers:
+                    addresses: [8.8.8.8, 1.1.1.1]
+```
+
+
+
 
 
 
