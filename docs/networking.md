@@ -8,23 +8,26 @@ Commands relating to configuring (including information gathering) networking. A
 The ip command is availible on most distros and is used for gathering information on network interfaces and routes. It can also be used to turn interfaces
 on and off. For more details: [man ip](https://linux.die.net/man/8/ip)
 
-#### ``ip address``
+**Show ip information about all interfaces**
 
-Show ip information about all interfaces
+**``ip address``**
 
-#### ``ip route``
+**Show the routing table**
 
-Show the routing table
+**``ip route``**
 
-#### ``ip link set [interface] [up|down]``
 
-Bring an interface up or down, e.g. :
+**Bring an interface up or down**
 
-##### ``ip link set eth0 up``
+**``ip link set [interface] [up|down]``**
+
+For example:
+
+**``ip link set eth0 up``**
 
 Will bring interface eth0 up and:
 
-##### ``ip link set wlp1s0 down``
+**``ip link set wlp1s0 down``**
 
 will bring interface wlp1s0 down.
 
@@ -32,13 +35,15 @@ will bring interface wlp1s0 down.
 
 These tools are not availible on modern OSs but are still useful to know. For more details [man ifconfig](https://linux.die.net/man/8/ifconfig)
 
-#### ``ifconfig``
+**Show ip information about all interfaces**
 
-Show ip information about all interfaces
+**``ifconfig``**
 
-#### ``route``
 
-Show the routing table
+**Show the routing table**
+**``route``**
+
+
 
 ### Configuration
 
@@ -62,7 +67,42 @@ network:
             nameservers:
                     addresses: [8.8.8.8, 1.1.1.1]
 ```
+In order for your changes to take effect, you need to apply them with:
 
+``netplan apply``
+
+#### CentOS 7
+
+Networking in CentOS is managed with NetworkManager. It can be configured using the configuration files located in: /etc/sysconfig/network-scripts:
+
+```
+[root@centos ~]# ls -lh /etc/sysconfig/network-scripts/
+total 236K
+-rw-r--r--. 1 root root 1.7K Mar 29 19:25 ifcfg-eth0
+-rw-r--r--. 1 root root  287 Mar 29 19:32 ifcfg-ethernet-test
+-rw-r--r--. 1 root root  254 May 22  2020 ifcfg-lo
+```
+
+Each interface has a configuration file with a prefix of "ifcfg-" to set the ipaddress, gateway, dns, etc:
+
+```
+[root@centos ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0 | sed -E '/^#|^$/d'
+DEVICE="eth0"
+NAME="eth0"
+ONBOOT="yes"
+BOOTPROTO="none"
+IPV6INIT="yes"
+IPV6_ADDR_GEN_MODE="eui64"
+IPV6_PRIVACY="no"
+PEERDNS="no"
+DOMAIN=members.linode.com
+GATEWAY0=139.162.228.1
+DNS1=109.74.194.20
+DNS2=109.74.193.20
+DNS3=212.71.252.5
+IPADDR0=139.162.228.74
+PREFIX0=24
+```
 
 
 
