@@ -1,4 +1,7 @@
 # Dan's Linux Notebook
 
-A collection of notes on linux. Organised by area of function, e.g. Networking, Permissions, User and Group Management etc
+Hello and welcome! 
+
+This is a collection of notes on linux which I am writing to help me prepare for my Linux+ exam, and keep track of the concepts and commands I am learning.
+
 

@@ -1,5 +1,8 @@
-site_name: Linux Notes
+site_name: Dan's Linux Notebook
+site_url: https://linux.dan-hall.net
+site_description: Some notes on linux
+site_author: Dan Hall
 
-nav:
-  - Home: index.md
-  - Networking: networking.md
+theme:
+  name: mkdocs
+  navigation_depth: 4

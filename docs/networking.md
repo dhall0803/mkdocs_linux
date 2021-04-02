@@ -45,10 +45,10 @@ These tools are not availible on modern OSs but are still useful to know. For mo
 
 
 
-### Configuration
+## Configuration
 
 Configuring networking in linux varies by distro, so check the documentation for whatever you are using. Here's a summary of how to do it in Ubuntu and Centos.
-
+### Interface Configuration
 #### Ubuntu
 
 Modern versions of Ubuntu (>=18.04) use [Netplan](https://netplan.io/) to manage the configuration of network interfaces. Network settings are configured in YAML files located in /etc/netplan. Netplan uses these files to generate the configuration which is then used by lower level programs such as NetworkManager.
@@ -96,13 +96,67 @@ IPV6_ADDR_GEN_MODE="eui64"
 IPV6_PRIVACY="no"
 PEERDNS="no"
 DOMAIN=members.linode.com
-GATEWAY0=139.162.228.1
-DNS1=109.74.194.20
-DNS2=109.74.193.20
-DNS3=212.71.252.5
-IPADDR0=139.162.228.74
+GATEWAY0=10.1.1.1
+DNS1=8.8.8.8
+IPADDR0=10.1.1.10
 PREFIX0=24
 ```
+For example, the file above would configure the network settings for the interface eth0.
+
+### Setting and viewing the Hostname
+
+#### hostnamectl
+
+Systemd based Ubuntu and CentOS systems can use the ``hostnamectl`` command to view the hostname:
+
+```
+[root@centos ~]# hostnamectl
+   Static hostname: centos
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: d858259147b34cddab5591b3f0c48427
+           Boot ID: ebcce6bd55a24939924c9c9ea6956119
+    Virtualization: kvm
+  Operating System: CentOS Linux 7 (Core)
+       CPE OS Name: cpe:/o:centos:centos:7
+            Kernel: Linux 3.10.0-1160.15.2.el7.x86_64
+      Architecture: x86-64
+```
+
+You can change the hostname with the hostnamect command:
+
+``hostnamectl set-hostname [hostname]``
+
+e.g.
+
+```
+[root@centos ~]# hostnamectl set-hostname newhostname
+[root@centos ~]# hostnamectl
+   Static hostname: newhostname
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: d858259147b34cddab5591b3f0c48427
+           Boot ID: ebcce6bd55a24939924c9c9ea6956119
+    Virtualization: kvm
+  Operating System: CentOS Linux 7 (Core)
+       CPE OS Name: cpe:/o:centos:centos:7
+            Kernel: Linux 3.10.0-1160.15.2.el7.x86_64
+      Architecture: x86-64
+```
+Note that the hostname in the prompt of your shell did not change. This will not change until you logout and log back in.
+
+#### /etc/hostname
+
+You can also directly edit the contents of the /etc/hostname (or /etc/HOSTNAME depending on your distro) file:
+
+```
+[root@newhostname ~]# echo "centos" > /etc/hostname
+[root@newhostname ~]# hostnamectl
+   Static hostname: centos
+   Transient hostname: newhostname
+   ....
+```
+
 
 
 
