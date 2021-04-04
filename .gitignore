@@ -1,2 +1,3 @@
 #Site build folder
 site/
+.env/

@@ -1,5 +1,5 @@
 # User Management
-
+Page last revised on: {{ git_revision_date }}
 ## Default Settings
 
 The default settings used when users are created are defined two main files:
@@ -43,7 +43,9 @@ CREATE_HOME	yes
 
 Here's a run down of some of the enabled options:
 
-#### UID_MIN/MAX
+### UID Options
+
+##### UID_MIN/MAX
 Notice that there are three sets of settings
 for UID, plain UID, SYS_UID, and SUB_UID:
 
@@ -56,15 +58,35 @@ UID_MAX                 60000
 SYS_UID_MIN               201
 SYS_UID_MAX               999
 # Extra per user uids
-SUB_UID_MIN		   100000
-SUB_UID_MAX		600100000
+SUB_UID_MIN		       100000
+SUB_UID_MAX		    600100000
 SUB_UID_COUNT		    65536
 
 ```
 
 - **UID** are the ids assigned to standard users who will be logging in and working with the system interactively (like you!)
-- **SYS_UID** are the ids assigned to system accouts. System accounts are used to run services and are not usually able to login interactively
+- **SYS_UID** are the ids assigned to system accounts. System accounts are used to run services and are not usually able to login interactively
 - **SUB_UID**s are blocks of UIDs reserved for use by a specific user (defined in the ``/etc/subuid`` file.) They are beyond the scope of this page. 
 
-The *_MIN option specifies the lowest value a UID for that type of user can have. 
-The *_MAX option specifies the highest value a UID for that type of user can have.
+The \*_MIN option specifies the lowest value a UID for that type of user can have. 
+
+The \*_MAX option specifies the highest value a UID for that type of user can have.
+
+### Password Options
+##### PASS_MAX_DAYS
+
+How many days old a password can be before it must be changed
+
+##### PASS_MIN_DAYS
+
+The minimum days a user must wait before changing their password
+
+##### PASS_WARN_AGE
+
+A warning is displayed to the user this many days before it expires
+
+##### ENCRYPT_METHOD
+
+The hashing algorithm used to hash the passwords stored in the /etc/shadow file
+
+
