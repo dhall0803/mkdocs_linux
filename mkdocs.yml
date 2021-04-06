@@ -4,14 +4,14 @@ site_description: Some notes on linux
 site_author: Dan Hall
 repo_url: https://github.com/dhall0803/mkdocs_linux
 
-# theme:
-#   name: material
-#   custom_dir: customizations
-#   palette:
-#     scheme: slate
-#     primary: teal
+theme:
+  name: material
+  custom_dir: customizations
+  palette:
+    scheme: slate
+    primary: teal
 
-# plugins:
-#   - search
-#   - git-revision-date
+plugins:
+  - search
+  - git-revision-date
 
